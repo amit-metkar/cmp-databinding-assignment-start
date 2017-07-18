@@ -23,9 +23,9 @@
     <hr>
     <div class="row">
         <div *ngFor="let count of numberList">
-            <app-even *ngIf="count%2==0; else odd"></app-even>
+            <app-even *ngIf="(count%2 == 0); else odd" [number]="count"></app-even>
             <ng-template #odd>
-                <app-odd></app-odd>
+                <app-odd [number]="count"></app-odd>
             </ng-template>
         </div>
     </div>

@@ -9,7 +9,7 @@ export class GameControlComponent implements OnInit {
 
   @Output() gameStart = new EventEmitter<{count: number}>();
 
-  count: number;
+  count: number = 0;
   ref;
 
   constructor() { }
@@ -18,16 +18,14 @@ export class GameControlComponent implements OnInit {
   }
 
   onGameStart() {
-    this.ref = setInterval(this.startTimer, 1000);
+    this.ref = setInterval(()=> {
+      this.count++;
+      this.gameStart.emit({count: this.count});
+    }, 1000);
   }
 
   onGameStop() {
-    this.ref.clearInterval();
-  }
-
-  startTimer() {
-    this.count++;
-      this.gameStart.emit({count: this.count});
+    clearInterval(this.ref);
   }
 
 }
